@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Keyboard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="850" ResizeMode="NoResize" >
+        Title="MainWindow" Height="550" Width="850" ResizeMode="NoResize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" >
     <Window.Resources>
         <!-- Шаблон кнопок букв-->
         <ControlTemplate x:Key="BtWords" TargetType="{x:Type Button}">
@@ -195,7 +195,7 @@
                 </TransformGroup>
             </Slider.RenderTransform>
         </Slider>
-        <WrapPanel Grid.Row="1" Grid.ColumnSpan="3" Margin="0,118,0,0" Grid.RowSpan="2">
+        <WrapPanel x:Name="keys" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,118,0,0" Grid.RowSpan="2">
             <!-- первый ряд кнопок-->
             <Button Style="{StaticResource Finger5}">`</Button>
             <Button Style="{StaticResource Finger5 }">1</Button>
@@ -244,7 +244,11 @@
             <!-- Четвертый ряд кнопок-->
             <Button Template="{StaticResource XLargeBt}" Style="{StaticResource GrayButton}">Shift</Button>
             <Button Style="{StaticResource Finger5}">Z</Button>
-            <Button Style="{StaticResource Finger4}">X</Button>
+            <Button Style="{StaticResource Finger4}">
+                <Button.Background>
+                    <SolidColorBrush Color="#FDFFFF00" Opacity="1"/>
+                </Button.Background> X
+            </Button>
             <Button Style="{StaticResource Finger3}">C</Button>
             <Button Style="{StaticResource Finger2}">V</Button>
             <Button Style="{StaticResource Finger2}">B</Button>

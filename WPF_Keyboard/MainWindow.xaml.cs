@@ -20,9 +20,41 @@ namespace WPF_Keyboard
     /// </summary>
     public partial class MainWindow : Window
     {
+            KeyConverter keyconv = new KeyConverter();
         public MainWindow()
         {
             InitializeComponent();
+            foreach (Button item in this.keys.Children)
+            {
+                item.Content = item.Content.ToString().ToLower();
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            foreach (Button item in this.keys.Children)
+            {
+                if (e.Key.ToString() == "LeftShift" && item.Content.ToString().Length == 1)
+                    item.Content = item.Content.ToString().ToUpper();
+                if (keyconv.ConvertToString(e.Key) == item.Content.ToString().ToUpper())
+                {
+                    item.Opacity=0.5;
+                }
+
+            }
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            foreach (Button item in this.keys.Children)
+            {
+                if (e.Key.ToString() == "LeftShift" && item.Content.ToString().Length == 1)
+                    item.Content = item.Content.ToString().ToLower();
+                if (keyconv.ConvertToString(e.Key) == item.Content.ToString().ToUpper())
+                {
+                    item.Opacity = 100;
+                }
+            }
         }
     }
 }
