@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Keyboard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="850" ResizeMode="NoResize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" >
+        Title="MainWindow" Height="577" Width="861" ResizeMode="NoResize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" >
     <Window.Resources>
         <!-- Шаблон кнопок букв-->
         <ControlTemplate x:Key="BtWords" TargetType="{x:Type Button}">
@@ -167,25 +167,28 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="186*"/>
-            <ColumnDefinition Width="150*"/>
-            <ColumnDefinition Width="89*"/>
+            <ColumnDefinition Width="365*"/>
+            <ColumnDefinition Width="295*"/>
+            <ColumnDefinition Width="122*"/>
+            <ColumnDefinition Width="52*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="1*" ></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Style="{StaticResource NormalText}" Grid.Row="0" HorizontalAlignment="Left" Content="Speed:" Margin="0,0,0,78" Width="Auto"></Label>
-        <Label Style="{StaticResource BoldText}" Grid.Row="0" HorizontalAlignment="Left" Content="0" Margin="69,0,0,78" Width="Auto"></Label>
-        <Label Style="{StaticResource NormalText}" Grid.Row="0" HorizontalAlignment="Left" Content="chr/min" Margin="94,0,0,78" Width="Auto"/>
-        <Label Style="{StaticResource NormalText}" Grid.Row="0" HorizontalAlignment="Left" Content="Fails:" Margin="240,0,0,78" Width="Auto"/>
-        <Label Style="{StaticResource BoldText}" Grid.Row="0" HorizontalAlignment="Left" Content="0" Margin="294,0,0,78" Width="Auto"></Label>
-        <Label Style="{StaticResource NormalText}" Grid.Row="0" HorizontalAlignment="Left" Content="Difficulty:" Margin="9,0,0,78" Width="Auto" Grid.Column="1"/>
-        <Label Style="{StaticResource BoldText}" Grid.Row="0" HorizontalAlignment="Left" ContentStringFormat="F0" Content="{Binding ElementName=slider1, Path=Value, Mode=OneWay}" Margin="103,0,0,78" Width="Auto" Grid.Column="1"/>
-        <Label Style="{StaticResource NormalText}" Grid.Row="0" HorizontalAlignment="Left" Content="Case Sensitive:" Margin="286,0,0,78" Width="Auto" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <TextBox Background="LightCyan" Grid.Row="1" Grid.ColumnSpan="3"></TextBox>
-        <Slider x:Name="slider1" HorizontalAlignment="Left" Margin="131,8,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+        <Label Style="{StaticResource NormalText}" Grid.Row="0" HorizontalAlignment="Left" Content="Speed:" Margin="0,0,0,78" Width="64"></Label>
+        <Label x:Name="_speed" Style="{StaticResource BoldText}" Grid.Row="0" HorizontalAlignment="Left" Content="0" Margin="69,1,0,77" Width="41"></Label>
+        <Label Style="{StaticResource NormalText}" Grid.Row="0" HorizontalAlignment="Left" Content="chr/min" Margin="139,-1,0,79" Width="72"/>
+        <Label Style="{StaticResource NormalText}" Grid.Row="0" HorizontalAlignment="Left" Content="Fails:" Margin="240,0,0,78" Width="54"/>
+        <Label x:Name="_fail" Style="{StaticResource BoldText}" Grid.Row="0" HorizontalAlignment="Left" Content="0" Margin="294,0,0,78" Width="43"></Label>
+        <Label Style="{StaticResource NormalText}" Grid.Row="0" HorizontalAlignment="Left" Content="Difficulty:" Margin="359,0,0,78" Width="94" Grid.ColumnSpan="2"/>
+        <Label x:Name="dif" Style="{StaticResource BoldText}" Grid.Row="0" HorizontalAlignment="Left" ContentStringFormat="F0" Content="{Binding ElementName=slider1, Path=Value, Mode=OneWay}" Margin="81,1,0,77" Width="30" Grid.Column="1" RenderTransformOrigin="0.362,0.57"/>
+        <Label Style="{StaticResource NormalText}" Grid.Row="0" HorizontalAlignment="Left" Content="Case Sensitive:" Margin="281,-1,0,79" Width="133" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="tb1" BorderBrush="Black" Background="LightCyan" Grid.ColumnSpan="4" Grid.Row="1"/>
+        <TextBox BorderBrush="Black" x:Name="tb2" Background="LightCyan" Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="1" TextChanged="tb2_TextChanged"/>
+        <Slider x:Name="slider1" HorizontalAlignment="Left" Margin="131,8,0,0" VerticalAlignment="Top" Width="130" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Height="18" Minimum="1">
             <Slider.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -195,7 +198,7 @@
                 </TransformGroup>
             </Slider.RenderTransform>
         </Slider>
-        <WrapPanel x:Name="keys" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,118,0,0" Grid.RowSpan="2">
+        <WrapPanel x:Name="keys" Grid.Row="3" Grid.ColumnSpan="4" Margin="0,0,0,0">
             <!-- первый ряд кнопок-->
             <Button Style="{StaticResource Finger5}">`</Button>
             <Button Style="{StaticResource Finger5 }">1</Button>
@@ -267,6 +270,7 @@
             <Button Template="{StaticResource SmallBt}" Style="{StaticResource GrayButton}">WIN</Button>
             <Button Template="{StaticResource SmallBt}" Style="{StaticResource GrayButton}">Ctrl</Button>
         </WrapPanel>
-        <CheckBox Content="" HorizontalAlignment="Left" Margin="119,10,0,0" VerticalAlignment="Top" Height="16" Width="20" Grid.Column="2"/>
+        <CheckBox Content="" HorizontalAlignment="Left" Margin="119,10,0,0" VerticalAlignment="Top" Height="16" Width="20" Grid.Column="2" Grid.ColumnSpan="2" Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked"/>
+        <Button x:Name="_startBt" Grid.Column="2" Content="Start" HorizontalAlignment="Center" Margin="0,56,0,0" VerticalAlignment="Top" Height="25" Width="106" Click="_startBt_Click"/>
     </Grid>
 </Window>
